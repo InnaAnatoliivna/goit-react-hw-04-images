@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
 
-const ImageGallery = ({ arrayResults, onOpenModal, ref }) => {
+const ImageGallery = ({ arrayResults, onOpenModal }) => {
     return (
         <ul className="ImageGallery" id='gallery'>
             {arrayResults.map(image => {
