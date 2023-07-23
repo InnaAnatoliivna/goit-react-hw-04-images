@@ -17,11 +17,12 @@ export const App = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [error, setError] = useState('')
   const prevQuery = useRef(searchQuery);
   const prevPage = useRef(page);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchData = async () => {
       setShowLoader(true);
       try {
         const data = await api.fetchImages(searchQuery, page);
@@ -31,12 +32,13 @@ export const App = () => {
         !data.totalHits && toast.error("No results found. Please try again!");
         page >= totalPage && toast.warning("We're sorry, but you've reached the end of search results!");
       } catch (error) {
-        console.error(error);
+        setError(error.message);
       } finally {
         setShowLoader(false);
       }
     };
-    if (prevQuery.current !== searchQuery || prevPage.current !== page) fetchImages();
+
+    if (prevQuery.current !== searchQuery || prevPage.current !== page) fetchData();
   }, [page, searchQuery]);
 
   function onFormSubmit(searchQueryOriginal) {
