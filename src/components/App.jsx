@@ -17,7 +17,7 @@ export const App = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [error, setError] = useState('')
+  // const [error, setError] = useState('')
   const prevQuery = useRef(searchQuery);
   const prevPage = useRef(page);
 
@@ -32,7 +32,8 @@ export const App = () => {
         !data.totalHits && toast.error("No results found. Please try again!");
         page >= totalPage && toast.warning("We're sorry, but you've reached the end of search results!");
       } catch (error) {
-        setError(error.message);
+        // setError(error.message);
+        console.error(error.message);
       } finally {
         setShowLoader(false);
       }
